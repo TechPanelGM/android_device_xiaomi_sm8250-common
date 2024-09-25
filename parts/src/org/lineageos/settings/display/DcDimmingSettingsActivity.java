@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2015-2016 The CyanogenMod Project
- *               2017 The LineageOS Project
+ *               2017,2021-2022 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,23 +15,20 @@
  * limitations under the License.
  */
 
-package org.lineageos.settings.popupcamera;
+package org.lineageos.settings.display;
 
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 
-public class PopupCameraSettingsActivity extends PreferenceActivity {
+import com.android.settingslib.collapsingtoolbar.CollapsingToolbarBaseActivity;
 
-    private static final String TAG_POPUPCAMERA = "popupcamera";
+public class DcDimmingSettingsActivity extends CollapsingToolbarBaseActivity  {
+
+    private static final String TAG_DCDIMMING = "dcdimming";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        getFragmentManager()
-                .beginTransaction()
-                .replace(android.R.id.content, new PopupCameraSettingsFragment(),
-                        TAG_POPUPCAMERA)
-                .commit();
+        getFragmentManager().beginTransaction().replace(com.android.settingslib.collapsingtoolbar.R.id.content_frame,
+                new DcDimmingSettingsFragment(), TAG_DCDIMMING).commit();
     }
 }
