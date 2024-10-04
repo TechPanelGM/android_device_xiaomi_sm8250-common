@@ -158,6 +158,7 @@ endif
 
 # Device-specific settings
 PRODUCT_PACKAGES += \
+    XiaomiDolby \
     XiaomiParts
 
 # Display
@@ -171,6 +172,35 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     vendor.qti.hardware.memtrack-service
+
+ifeq ($(TARGET_USES_MIUI_DOLBY),true)
+# Dolby Vendor Props
+PRODUCT_VENDOR_PROPERTIES += \
+    ro.vendor.dolby.dax.version=DAX3_3.6.1.6_r1 \
+    ro.vendor.audio.dolby.dax.version=DAX3_3.6 \
+    ro.vendor.audio.dolby.dax.support=true \
+    ro.vendor.audio.dolby.surround.enable=true
+
+# Dolby Effects Props
+PRODUCT_VENDOR_PROPERTIES += \
+    persist.vendor.audio.delta.refresh=true
+
+# MiSound with Dolby Environment (By Default - Disabled)
+PRODUCT_VENDOR_PROPERTIES += \
+    persist.vendor.audio.misound.disable=true \
+    ro.vendor.audio.misound.bluetooth.enable=true
+
+else
+# MiSound (Dirac Only)
+# MiSound without Dolby (By Default - Enabled)
+PRODUCT_VENDOR_PROPERTIES += \
+    persist.vendor.audio.misound.disable=false \
+    ro.vendor.audio.misound.bluetooth.enable=true
+endif
+
+# Dolby VNDK libs
+PRODUCT_PACKAGES += \
+    libstagefright_foundation-v33
 
 # DRM
 PRODUCT_PACKAGES += \
@@ -266,6 +296,9 @@ endif
 PRODUCT_PACKAGES += \
     media_codecs_kona.xml \
     media_codecs_performance_kona.xml
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/media/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml
 
 # NFC
 PRODUCT_PACKAGES += \
