@@ -109,7 +109,7 @@ TARGET_KERNEL_SOURCE := kernel/xiaomi/sm8250
 TARGET_KERNEL_CONFIG := \
     vendor/kona-perf_defconfig \
     vendor/xiaomi/sm8250-common.config \
-    vendor/xiaomi/umi.config
+    vendor/xiaomi/${TARGET_DEVICE}.config
 
 # Lineage Health
 TARGET_HEALTH_CHARGING_CONTROL_SUPPORTS_BYPASS := false
